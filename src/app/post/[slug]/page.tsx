@@ -16,7 +16,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
   return (
     <div className="mx-96 text-black">
       <h1 className="text-3xl font-bold mb-4">{title}</h1>
-      <Markdown>{html as string}</Markdown>
+      {html && <Markdown>{html as string}</Markdown>}
 
       {authors?.length && (
         <div className="mb-4">
