@@ -1,4 +1,4 @@
-import { getPostsByTag, getTags } from '@/utils/api';
+import { getPostsByTag, getTags } from '@/lib/api';
 import Card from '@/components/Card';
 import Tags from '@/components/Tags';
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import GhostContentAPI from '@tryghost/content-api';
 import type { GhostContentAPIOptions, Params } from '@tryghost/content-api';
-import { convertString } from './helpers';
+import { convertString } from './utils';
 
 /**
  * Extend the GhostContentAPIOptions interface to add makeRequest method

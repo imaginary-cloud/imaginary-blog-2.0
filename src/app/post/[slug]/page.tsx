@@ -1,5 +1,5 @@
 import Markdown from 'markdown-to-jsx';
-import { getSinglePost } from '@/utils/api';
+import { getSinglePost } from '@/lib/api';
 
 export default async function Post({ params }: { params: { slug: string } }) {
   // Fetch the post data based on the slug param
