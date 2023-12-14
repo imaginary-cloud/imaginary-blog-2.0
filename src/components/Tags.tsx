@@ -17,12 +17,22 @@ export default function Tags({ tags }: TagsProps) {
 
   // Add URL parameters and keep the user on the same page
   const handleSelectedTag = useCallback(
-    (name: string) => router.push(`${pathname}?tag=${name}`),
+    (name?: string) =>
+      !name ? router.push(pathname) : router.push(`${pathname}?tag=${name}`),
     [router, pathname]
   );
 
   return (
     <div className="flex items-center justify-center">
+      <span
+        className={clsx(
+          'cursor-pointer mx-5 text-black transition-colors hover:text-blue-500',
+          { 'text-blue-500': !tagParam }
+        )}
+        onClick={() => handleSelectedTag()}
+      >
+        All
+      </span>
       {tags.map(({ name }, index) => (
         <span
           key={index}

@@ -3,9 +3,8 @@ import Card from '@/components/Card';
 import Tags from '@/components/Tags';
 
 export default async function Home(props: PageProps) {
-  const searchParam = props.searchParams.tag ? props.searchParams.tag : 'all';
-
-  const posts = await getPostsByTag(searchParam as string);
+  const searchParam = props.searchParams.tag;
+  const posts = await getPostsByTag(searchParam as string | undefined);
   const tags = await getTags();
 
   return (

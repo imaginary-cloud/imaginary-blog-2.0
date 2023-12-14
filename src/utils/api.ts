@@ -1,6 +1,6 @@
-import { GhostContentAPIOptions } from '@tryghost/content-api';
-import GhostContentAPI from '@tryghost/content-api';
 import axios from 'axios';
+import GhostContentAPI from '@tryghost/content-api';
+import type { GhostContentAPIOptions, Params } from '@tryghost/content-api';
 import { convertString } from './helpers';
 
 /**
@@ -54,11 +54,15 @@ export const getPosts = async () =>
     .catch((err) => console.log('Error while fetching all posts: ', err));
 
 // Fetch all posts by tag
-export const getPostsByTag = async (tag: string) =>
-  await api.posts
-    .browse({ filter: `tags:${convertString(tag)}`, include: ['tags', 'authors'] })
-    .catch((err) => console.log('Error while fetching posts by tag: ', err));
+export const getPostsByTag = async (tag?: string) => {
+  const params: Params = tag
+    ? { filter: `tags:${convertString(tag)}`, include: ['tags', 'authors'] }
+    : { include: ['tags', 'authors'] };
 
+  return await api.posts
+    .browse(params)
+    .catch((err) => console.log('Error while fetching posts by tag: ', err));
+};
 // Fetch post data
 export const getSinglePost = async (slug: string) =>
   await api.posts.read({ slug }, { include: ['tags', 'authors'] }).catch((err) => {
