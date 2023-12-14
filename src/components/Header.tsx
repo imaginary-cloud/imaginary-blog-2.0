@@ -2,15 +2,13 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-
-import * as React from 'react';
+import { useState } from 'react';
 import { Menu } from 'lucide-react';
-
 import { menus } from '@/lib/constants';
 import Button from '@/components/Button';
 
 export default function Header() {
-  const [state, setState] = React.useState(false);
+  const [show, setShow] = useState(false);
 
   return (
     <header className="py-4 bg-white">
@@ -23,15 +21,13 @@ export default function Header() {
             <div className="md:hidden">
               <button
                 className="text-gray-700 outline-none p-2 rounded-md focus:border-gray-400 focus:border"
-                onClick={() => setState(!state)}
+                onClick={() => setShow((prevState) => !prevState)}
               >
                 <Menu />
               </button>
             </div>
           </div>
-          <div
-            className={`items-center space-between ${!state ? 'flex' : 'hidden'}`}
-          >
+          <div className={`items-center space-between ${!show ? 'flex' : 'hidden'}`}>
             <ul className="pace-y-8 md:flex md:space-x-6 md:space-y-0">
               {menus.map(({ path, title }, index) => (
                 <li key={index} className="text-gray-600 hover:text-blue-500">
