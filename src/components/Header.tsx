@@ -7,6 +7,7 @@ import * as React from 'react';
 import { Menu } from 'lucide-react';
 
 import { menus } from '@/lib/constants';
+import Button from '@/components/Button';
 
 export default function Header() {
   const [state, setState] = React.useState(false);
@@ -14,8 +15,8 @@ export default function Header() {
   return (
     <header className="py-4 bg-white">
       <nav className="h-full max-w-[1150px] justify-between items-center mx-auto flex">
-        <div className="items-center px-4 w-full mx-auto md:flex md:px-8">
-          <div className="flex items-center justify-between py-3 md:py-5 md:block">
+        <div className="flex justify-between items-center px-4 w-full mx-auto md:flex md:px-8">
+          <div className=" py-3 md:py-5 md:block">
             <Link href="/">
               <Image src="logo.svg" alt="Logo" width={250} height={250} />
             </Link>
@@ -29,17 +30,19 @@ export default function Header() {
             </div>
           </div>
           <div
-            className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
-              state ? 'block' : 'hidden'
-            }`}
+            className={`items-center space-between ${!state ? 'flex' : 'hidden'}`}
           >
-            <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0">
+            <ul className="pace-y-8 md:flex md:space-x-6 md:space-y-0">
               {menus.map(({ path, title }, index) => (
                 <li key={index} className="text-gray-600 hover:text-blue-500">
                   <Link href={path}>{title}</Link>
                 </li>
               ))}
             </ul>
+            <Button
+              text="CONTACT US"
+              className="bg-blue-500 text-white px-4 py-2 ml-10"
+            />
           </div>
         </div>
       </nav>
