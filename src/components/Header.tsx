@@ -8,38 +8,37 @@ import { menus } from '@/lib/constants';
 import Button from '@/components/Button';
 
 export default function Header() {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
 
   return (
-    <header className="py-4 bg-white">
-      <nav className="h-full max-w-[1150px] justify-between items-center mx-auto flex">
-        <div className="flex justify-between items-center px-4 w-full mx-auto md:flex md:px-8">
-          <div className=" py-3 md:py-5 md:block">
+    <header className="h-full max-w-[1150px] mx-auto">
+      <nav className="md:flex w-full mx-auto px-5">
+        <div className="md:flex justify-between items-center w-full">
+          <div className="flex justify-between items-center py-3 md:py-5">
             <Link href="/">
               <Image src="logo.svg" alt="Logo" width={250} height={250} />
             </Link>
-            <div className="md:hidden">
-              <button
-                className="text-gray-700 outline-none p-2 rounded-md focus:border-gray-400 focus:border"
-                onClick={() => setShow((prevState) => !prevState)}
-              >
-                <Menu />
-              </button>
-            </div>
+            <button
+              className="text-gray-700 outline-none p-2 rounded-md md:hidden"
+              onClick={() => setShow(!show)}
+            >
+              <Menu />
+            </button>
           </div>
-          <div className={`items-center space-between ${!show ? 'flex' : 'hidden'}`}>
-            <ul className="pace-y-8 md:flex md:space-x-6 md:space-y-0">
-              {menus.map(({ path, title }, index) => (
-                <li key={index} className="text-gray-600 hover:text-blue-500">
-                  <Link href={path}>{title}</Link>
+          <div
+            className={`md:flex items-center justify-between mt-8 md:mt-0 ${
+              show ? 'block' : 'hidden'
+            } `}
+          >
+            <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0">
+              {menus.map((item, idx) => (
+                <li key={idx} className="text-gray-600 hover:text-indigo-600">
+                  <Link href={item.path}>{item.title}</Link>
                 </li>
               ))}
             </ul>
-            <Button
-              text="CONTACT US"
-              className="bg-blue-500 text-white px-4 py-2 ml-10"
-            />
           </div>
+          <Button text="CONTACT US" className="bg-blue-500 h-10 text-white p-2" />
         </div>
       </nav>
     </header>
