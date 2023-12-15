@@ -8,7 +8,7 @@ export default async function Home(props: PageProps) {
   const tags = await getTags();
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
+    <main className="flex min-h-screen flex-col items-center p-32">
       <Tags tags={tags} />
       {Array.isArray(posts) && posts.length ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-16">

@@ -14,7 +14,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
   const { title, authors, tags, html } = data;
 
   return (
-    <div className="mx-96 text-black">
+    <div className="mx-96 text-black p-32">
       <h1 className="text-3xl font-bold mb-4">{title}</h1>
       {html && <Markdown>{html as string}</Markdown>}
 
