@@ -17,25 +17,32 @@ type CardData = {
 };
 
 export default function Card({ data }: CardData) {
-  const { slug, title, excerpt, authors, feature_image } = data;
+  const { slug, title, excerpt, authors, feature_image, tags } = data;
+
+  const tagsName = tags?.map(({ name }) => name).join(', '); // comma seperated array
 
   return (
     <Link href={`/post/${slug}`} className="flex-1">
       <Cardx className="flex flex-col min-h-full">
-        <CardHeader>
+        <CardHeader className="p-0">
           {feature_image && (
-            <CardDescription>
+            <CardDescription className="relative w-full h-[150px] p-5">
               <Image
+                style={{ objectFit: 'cover' }}
                 src={feature_image}
                 alt={`img-${slug}`}
-                width={300}
-                height={300}
+                fill
               />
             </CardDescription>
           )}
-          <CardTitle>{title}</CardTitle>
+          <CardTitle className="p-5">{title}</CardTitle>
+          {tags && tags.length > 0 && (
+            <span className="px-5 text-blue-400">FROM: {tagsName}</span>
+          )}
         </CardHeader>
-        {excerpt && <CardContent>{truncateString(excerpt)}</CardContent>}
+        {excerpt && (
+          <CardContent className="px-5">{truncateString(excerpt)}</CardContent>
+        )}
         <CardFooter className="mt-auto">
           {authors?.length && (
             <div className="mt-auto">
