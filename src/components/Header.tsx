@@ -16,7 +16,7 @@ export default function Header() {
         <div className="md:flex justify-between items-center w-full">
           <div className="flex justify-between items-center py-3 md:py-5">
             <Link href="/">
-              <Image src="logo.svg" alt="Logo" width={250} height={250} />
+              <Image src="/logo.svg" alt="Logo" width={250} height={250} />
             </Link>
             <button
               className="text-gray-700 outline-none p-2 rounded-md md:hidden"
@@ -26,7 +26,7 @@ export default function Header() {
             </button>
           </div>
           <div
-            className={`md:flex items-center justify-between mt-8 md:mt-0 ${
+            className={`md:flex md:flex-row flex-col items-center justify-between mt-8 md:mt-0 ${
               show ? 'block' : 'hidden'
             } `}
           >
