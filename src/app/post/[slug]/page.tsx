@@ -1,5 +1,9 @@
-import Markdown from 'markdown-to-jsx';
+import dynamic from 'next/dynamic';
 import { getSinglePost } from '@/lib/api';
+
+const MarkdownNoSSR = dynamic(() => import('markdown-to-jsx'), { ssr: false });
+
+import '@/app/globals.css';
 
 export default async function Post({ params }: { params: { slug: string } }) {
   // Fetch the post data based on the slug param
@@ -14,9 +18,9 @@ export default async function Post({ params }: { params: { slug: string } }) {
   const { title, authors, tags, html } = data;
 
   return (
-    <div className="mx-96 text-black p-32">
-      <h1 className="text-3xl font-bold mb-4">{title}</h1>
-      {html && <Markdown>{html as string}</Markdown>}
+    <div className="w-3/4 mx-auto my-5 text-black">
+      <h1 className="text-3xl font-bold">{title}</h1>
+      {html && <MarkdownNoSSR>{html as string}</MarkdownNoSSR>}
 
       {authors?.length && (
         <div className="mb-4">
