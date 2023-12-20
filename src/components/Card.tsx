@@ -26,7 +26,7 @@ export default function Card({ data }: CardData) {
       <Cardx className="flex flex-col min-h-full">
         <CardHeader className="p-0">
           {feature_image && (
-            <CardDescription className="relative w-full h-[150px] p-5">
+            <CardDescription className="relative w-full h-[200px]">
               <Image
                 style={{ objectFit: 'cover' }}
                 src={feature_image}
@@ -45,7 +45,7 @@ export default function Card({ data }: CardData) {
         )}
         <CardFooter className="mt-auto">
           {authors?.length && (
-            <div className="mt-auto">
+            <div>
               {authors.map(({ id, name }) => (
                 <span key={id} className="text-gray-400 font-light mt-5">
                   Author: {name}

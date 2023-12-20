@@ -12,6 +12,7 @@
     "@headlessui/react": "^1.7.17",
     "@radix-ui/react-navigation-menu": "^1.1.4",
     "@tryghost/content-api": "^1.11.20",
+    "@types/swiper": "^6.0.0",
     "axios": "^1.6.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
@@ -21,6 +22,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
+    "swiper": "^11.0.5",
     "tailwind-merge": "^2.1.0",
     "tailwindcss-animate": "^1.0.7"
   },

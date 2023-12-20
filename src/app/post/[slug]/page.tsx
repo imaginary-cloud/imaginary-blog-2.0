@@ -1,9 +1,10 @@
 import dynamic from 'next/dynamic';
-import { getSinglePost } from '@/lib/api';
+import { getPostsByTag, getSinglePost } from '@/lib/api';
 
 const MarkdownNoSSR = dynamic(() => import('markdown-to-jsx'), { ssr: false });
 
 import '@/app/globals.css';
+import Slider from '@/components/Slider';
 
 export default async function Post({ params }: { params: { slug: string } }) {
   // Fetch the post data based on the slug param
@@ -37,11 +38,14 @@ export default async function Post({ params }: { params: { slug: string } }) {
       {tags?.length && (
         <>
           <strong>Tags: </strong>
-          {tags.map(({ name }, index) => (
-            <span key={index}>
-              {name}
-              {index !== tags.length - 1 ? ', ' : ''}
-            </span>
+          {tags.map(async ({ name }, index) => (
+            <>
+              <span key={index}>
+                {name}
+                {index !== tags.length - 1 ? ', ' : ''}
+              </span>
+              <Slider title="Related Posts" posts={await getPostsByTag(name)} />
+            </>
           ))}
         </>
       )}
