@@ -7,8 +7,8 @@ type ButtonProps = {
   className?: string;
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
-  text: string;
-  rightIcon?: JSX.Element;
+  text?: string;
+  icon?: JSX.Element;
 };
 
 export default function Button({
@@ -17,6 +17,7 @@ export default function Button({
   onClick,
   className,
   type,
+  icon,
 }: ButtonProps) {
   const style = !type ? `${className}` : className;
 
@@ -27,7 +28,8 @@ export default function Button({
       onClick={onClick}
       type={type || 'button'}
     >
-      {text}
+      {text && text}
+      {icon && icon}
     </button>
   );
 }

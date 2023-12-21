@@ -55,6 +55,7 @@ export const getPosts = async () =>
 
 // Fetch all posts by tag
 export const getPostsByTag = async (tag?: string) => {
+  console.log('Related posts tag: ', tag);
   const params: Params = tag
     ? {
         limit: 'all',

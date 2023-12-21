@@ -23,7 +23,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
       <h1 className="text-3xl font-bold">{title}</h1>
       {html && <MarkdownNoSSR>{html as string}</MarkdownNoSSR>}
 
-      {authors?.length && (
+      {!!authors?.length && (
         <div className="mb-4">
           <strong>Authors: </strong>
           {authors.map(({ name }, index) => (
@@ -35,10 +35,10 @@ export default async function Post({ params }: { params: { slug: string } }) {
         </div>
       )}
 
-      {tags?.length && (
+      {!!tags?.length && (
         <>
           <strong>Tags: </strong>
-          {tags.map(async ({ name }, index) => (
+          {tags?.map(async ({ name }, index) => (
             <>
               <span key={index}>
                 {name}

@@ -6,7 +6,7 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'staging.imaginarycloud.com',
         port: '',
-        pathname: '/blog/content/images/**',
+        pathname: '/blog/content/images/**/**',
       },
       {
         protocol: 'https',
