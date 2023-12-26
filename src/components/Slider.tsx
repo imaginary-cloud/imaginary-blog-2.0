@@ -10,7 +10,6 @@ import { FaChevronCircleRight, FaChevronCircleLeft } from 'react-icons/fa';
 import { register } from 'swiper/element/bundle';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import 'swiper/css/navigation';
 
 // register Swiper custom elements
 register();
@@ -36,16 +35,16 @@ export default function Slider({ posts, title }: SliderProps) {
         onSlideChange={() => console.log('slide change')}
         navigation
       >
-        <div className="absolute top-1/2 transform -translate-y-1/2 flex items-center justify-between w-full z-100">
+        <div className="absolute inset-x-0 bottom-0 flex items-center justify-center z-20 overflow-visible w-full">
           <Button
             icon={<FaChevronCircleLeft />}
             onClick={() => swiperRef?.slidePrev()}
-            className="absolute right-[-20px] bg-gray-800 text-white p-2 rounded-full cursor-pointer"
+            className="relative right-[50px] bg-gray-800 text-white p-2 rounded-full cursor-pointer"
           />
           <Button
             icon={<FaChevronCircleRight />}
             onClick={() => swiperRef?.slideNext()}
-            className="absolute left-[-20px] bg-gray-800 text-white p-2 rounded-full cursor-pointer"
+            className="relative left-[50px] bg-gray-800 text-white p-2 rounded-full cursor-pointer"
           />
         </div>
 
