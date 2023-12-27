@@ -4,6 +4,7 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';
 import { Tags } from '@tryghost/content-api';
 import clsx from 'clsx';
+import { convertString } from '@/lib/utils';
 
 type TagsProps = {
   tags: Tags;
@@ -18,7 +19,9 @@ export default function Tags({ tags }: TagsProps) {
   // Add URL parameters and keep the user on the same page
   const handleSelectedTag = useCallback(
     (name?: string) =>
-      !name ? router.push(pathname) : router.push(`${pathname}?tag=${name}`),
+      !name
+        ? router.push(pathname)
+        : router.push(`${pathname}?tag=${convertString(name)}`),
     [router, pathname]
   );
 

@@ -56,7 +56,11 @@ export const getPosts = async () =>
 // Fetch all posts by tag
 export const getPostsByTag = async (tag?: string) => {
   const params: Params = tag
-    ? { filter: `tags:${convertString(tag)}`, include: ['tags', 'authors'] }
+    ? {
+        limit: 'all',
+        filter: `tags:${convertString(tag)}`,
+        include: ['tags', 'authors'],
+      }
     : { include: ['tags', 'authors'] };
 
   return await api.posts
