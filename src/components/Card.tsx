@@ -23,11 +23,12 @@ export default function Card({ data }: CardData) {
 
   return (
     <Link href={`/post/${slug}`} className="flex-1">
-      <Cardx className="flex flex-col min-h-full">
+      <Cardx className="flex flex-col min-h-full border-0 shadow-lg rounded-md border-white">
         <CardHeader className="p-0">
           {feature_image && (
-            <CardDescription className="relative w-full h-[200px]">
+            <CardDescription className="relative w-full h-[200px] rounded-md">
               <Image
+                className="rounded-t-md"
                 style={{ objectFit: 'cover' }}
                 src={feature_image}
                 alt={`img-${slug}`}
