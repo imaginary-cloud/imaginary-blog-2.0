@@ -11,11 +11,11 @@ export default function handler(
   if (req.method === 'POST') {
     const data = req.body;
 
-    // Extract the fields from the data
-    const { type, workflowRunId, workflowId, result, metadata, credits } =
-      data || {};
+    // // Extract the fields from the data
+    // const { type, workflowRunId, workflowId, result, metadata, credits } =
+    //   data || {};
 
-    console.log('Resultzzzzz: ', result);
+    console.log('DATA: ', data);
 
     res.status(200).json({ message: 'Copy received!' });
   } else {
