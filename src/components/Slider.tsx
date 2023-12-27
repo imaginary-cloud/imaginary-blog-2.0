@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { PostsOrPages } from '@tryghost/content-api';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
-import { FaChevronCircleRight, FaChevronCircleLeft } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 // Import Swiper React components
 import { register } from 'swiper/element/bundle';
@@ -35,16 +35,16 @@ export default function Slider({ posts, title }: SliderProps) {
         onSlideChange={() => console.log('slide change')}
         navigation
       >
-        <div className="absolute inset-x-0 bottom-0 flex items-center justify-center z-20 overflow-visible w-full">
+        <div className="absolute top-1/2 transform -translate-y-1/2 bottom-0 flex items-center justify-between z-20 overflow-visible w-full">
           <Button
-            icon={<FaChevronCircleLeft />}
+            icon={<FaChevronLeft />}
             onClick={() => swiperRef?.slidePrev()}
-            className="relative right-[50px] bg-gray-800 text-white p-2 rounded-full cursor-pointer"
+            className="relative text-gray-800 p-2 rounded-full cursor-pointer"
           />
           <Button
-            icon={<FaChevronCircleRight />}
+            icon={<FaChevronRight />}
             onClick={() => swiperRef?.slideNext()}
-            className="relative left-[50px] bg-gray-800 text-white p-2 rounded-full cursor-pointer"
+            className="relative text-gray-800 p-2 rounded-full cursor-pointer"
           />
         </div>
 
