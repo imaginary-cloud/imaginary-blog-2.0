@@ -14,13 +14,13 @@ type TagsProps = {
 export default function Tags({ tags }: TagsProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const tagParam = useSearchParams().get('tag');
+  const tagParam = useSearchParams()?.get('tag');
 
   // Add URL parameters and keep the user on the same page
   const handleSelectedTag = useCallback(
     (name?: string) =>
       !name
-        ? router.push(pathname)
+        ? router.push(pathname!)
         : router.push(`${pathname}?tag=${convertString(name)}`),
     [router, pathname]
   );
