@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { PostsOrPages } from '@tryghost/content-api';
+import { merriweather } from '@/lib/fonts';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 // Import Swiper React components
 import { register } from 'swiper/element/bundle';
@@ -26,7 +27,7 @@ export default function Slider({ posts, title }: SliderProps) {
 
   return (
     <div className="mt-10">
-      <h2>{title}</h2>
+      <h2 className={`${merriweather.className} text-xl`}>{title}</h2>
       <Swiper
         className="relative !z-0 overflow-visible"
         onSwiper={(swiper) => setSwiperRef(swiper)}

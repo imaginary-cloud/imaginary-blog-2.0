@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+
+const path = require('path');
+
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -15,6 +18,9 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+  },
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
   },
 };
 
