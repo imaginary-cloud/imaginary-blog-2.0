@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { months } from './constants';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -29,5 +30,5 @@ export const truncateString = (inputString: string) => {
 export const convertDate = (date: string) => {
   const res = new Date(date);
 
-  return `${res.getMonth()} ${res.getDay()}, ${res.getFullYear()}`;
+  return `${months[res.getMonth()]} ${res.getDay()}, ${res.getFullYear()}`;
 };

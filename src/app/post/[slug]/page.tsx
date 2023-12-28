@@ -23,6 +23,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
 
   // Destructure the relevant properties from the post data
   const { title, authors, tags, html, reading_time, updated_at } = data;
+  const readingTime = reading_time ? `${reading_time} min read` : '';
 
   return (
     <div className="w-[80%] mx-auto">
@@ -57,10 +58,12 @@ export default async function Post({ params }: { params: { slug: string } }) {
                   </span>
                   <div className="flex">
                     {updated_at && (
-                      <span className="ml-5">{convertDate(updated_at)}</span>
-                    )}
-                    {reading_time && (
-                      <span className="ml-2">{reading_time} min read.</span>
+                      <span className="ml-5">
+                        {convertDate(updated_at).concat(
+                          '. ',
+                          readingTime.toString()
+                        )}
+                      </span>
                     )}
                   </div>
                 </div>
