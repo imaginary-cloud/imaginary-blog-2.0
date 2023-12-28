@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { months } from './constants';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -24,4 +25,10 @@ export const truncateString = (inputString: string) => {
   // Join the first 20 words and add the ellipsis
   const truncatedString = words.slice(0, 20).join(' ') + '...';
   return truncatedString;
+};
+
+export const convertDate = (date: string) => {
+  const res = new Date(date);
+
+  return `${months[res.getMonth()]} ${res.getDay()}, ${res.getFullYear()}`;
 };

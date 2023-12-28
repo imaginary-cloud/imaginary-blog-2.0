@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import '../styles/main';
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -77,4 +79,35 @@
 
 .swiper-wrapper {
   z-index: -1 !important;
+}
+
+.markdown-wrapper {
+  h4 {
+    margin-bottom: 3rem;
+    font-size: 1.5rem;
+    font-weight: normal;
+  }
+
+  blockquote {
+    padding: 2rem 0;
+
+    p {
+      border-left: 2px solid $primary-color;
+      padding-left: 1rem;
+      font-weight: 400;
+    }
+  }
+
+  p {
+    margin-bottom: 2rem;
+
+    img {
+      margin: 0 auto;
+    }
+  }
+
+  a {
+    color: $primary-color;
+    border-bottom: 1px solid $primary-color;
+  }
 }

@@ -23,18 +23,17 @@ export default function Card({ data }: CardData) {
 
   return (
     <Link href={`/post/${slug}`} className="flex-1">
-      <Cardx className="flex flex-col min-h-full">
+      <Cardx className="flex flex-col min-h-full border-0 shadow-lg rounded-md border-white">
         <CardHeader className="p-0">
-          {feature_image && (
-            <CardDescription className="relative w-full h-[200px]">
-              <Image
-                style={{ objectFit: 'cover' }}
-                src={feature_image}
-                alt={`img-${slug}`}
-                fill
-              />
-            </CardDescription>
-          )}
+          <CardDescription className="relative w-full h-[200px] rounded-md">
+            <Image
+              className="rounded-t-md"
+              style={{ objectFit: 'cover' }}
+              src={feature_image ? feature_image : '/placeholder.webp'}
+              alt={`img-${slug}`}
+              fill
+            />
+          </CardDescription>
           <CardTitle className="p-5">{title}</CardTitle>
           {tags && tags.length > 0 && (
             <span className="px-5 text-blue-400">FROM: {tagsName}</span>

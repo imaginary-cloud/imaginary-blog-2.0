@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
-import { Lato } from 'next/font/google';
-import './globals.css';
+import { lato } from '@/lib/fonts';
+import './globals.scss';
 import Header from '@/components/Header';
-
-const lato = Lato({ subsets: ['latin'], weight: '400', style: ['normal'] });
 
 export const metadata: Metadata = {
   title: 'Imaginary Blog',

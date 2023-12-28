@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
+    "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-navigation-menu": "^1.1.4",
     "@tryghost/content-api": "^1.11.20",
     "@types/swiper": "^6.0.0",
@@ -35,6 +36,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "postcss": "^8",
+    "sass": "^1.69.5",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }
