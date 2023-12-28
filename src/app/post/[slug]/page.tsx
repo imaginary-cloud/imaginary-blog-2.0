@@ -4,6 +4,8 @@ import { getPostsByTag, getSinglePost } from '@/lib/api';
 import { lato, merriweather } from '@/lib/fonts';
 
 import Slider from '@/components/Slider';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { convertDate } from '@/lib/utils';
 
 // Dynamicly load Markdown component
 const Markdown = dynamic(() => import('markdown-to-jsx'), { ssr: false });
@@ -12,49 +14,67 @@ export default async function Post({ params }: { params: { slug: string } }) {
   // Fetch the post data based on the slug param
   const data = await getSinglePost(params.slug);
 
+  console.log('DATA: ', data);
+
   // Check if data exists, if not, display a loading or error message
   if (!data) {
     return <div>This post does not exist :/</div>;
   }
 
   // Destructure the relevant properties from the post data
-  const { title, authors, tags, html } = data;
+  const { title, authors, tags, html, reading_time, updated_at } = data;
 
   return (
     <div className="w-[80%] mx-auto">
       <div className="w-[50%] mx-auto py-20 text-black">
-        <h1 className={`${lato.className} text-3xl text-primary font-bold`}>
+        {!!tags?.length && (
+          <>
+            <span className="text-gray-500 text-xs">FROM: </span>
+            {tags?.map(async ({ name }, index) => (
+              <span key={index} className="text-primary text-xs">
+                {name?.toUpperCase()}
+                {index !== tags.length - 1 ? ', ' : ''}
+              </span>
+            ))}
+          </>
+        )}
+
+        <h1 className={`${lato.className} text-3xl text-primary font-bold mb-10`}>
           {title}
         </h1>
+
+        {!!authors?.length && (
+          <div className="flex items-center w-2/4 mb-4">
+            {authors.map(({ name }, index) => (
+              <>
+                <Avatar>
+                  <AvatarImage src="/user.png" />
+                </Avatar>
+                <div className="flex flex-col justify-start text-gray-400">
+                  <span className="ml-5" key={name}>
+                    Post written by: {name}
+                    {index !== authors.length - 1 ? ', ' : ''}
+                  </span>
+                  <div className="flex">
+                    {updated_at && (
+                      <span className="ml-5">{convertDate(updated_at)}</span>
+                    )}
+                    {reading_time && (
+                      <span className="ml-2">{reading_time} min read.</span>
+                    )}
+                  </div>
+                </div>
+              </>
+            ))}
+          </div>
+        )}
+
         {html && (
           <div
             className={`${merriweather.className} text-[20px] markdown-wrapper mt-10 !leading-8`}
           >
             <Markdown options={{ wrapper: Fragment }}>{html}</Markdown>
           </div>
-        )}
-
-        {!!authors?.length && (
-          <div className="mb-4">
-            <strong>Authors: </strong>
-            {authors.map(({ name }, index) => (
-              <span key={name}>
-                {name}
-                {index !== authors.length - 1 ? ', ' : ''}
-              </span>
-            ))}
-          </div>
-        )}
-        {!!tags?.length && (
-          <>
-            <strong>Tags: </strong>
-            {tags?.map(async ({ name }, index) => (
-              <span key={index}>
-                {name}
-                {index !== tags.length - 1 ? ', ' : ''}
-              </span>
-            ))}
-          </>
         )}
       </div>
       {!!tags?.length && (

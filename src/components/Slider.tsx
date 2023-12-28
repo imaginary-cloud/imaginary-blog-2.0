@@ -26,8 +26,8 @@ export default function Slider({ posts, title }: SliderProps) {
   if (!posts?.length) return;
 
   return (
-    <div className="mt-10">
-      <h2 className={`${merriweather.className} text-xl`}>{title}</h2>
+    <div>
+      <h2 className={`${merriweather.className} text-xl mb-10`}>{title}</h2>
       <Swiper
         className="relative !z-0 overflow-visible"
         onSwiper={(swiper) => setSwiperRef(swiper)}
