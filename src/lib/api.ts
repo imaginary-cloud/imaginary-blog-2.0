@@ -54,11 +54,13 @@ export const getPosts = async () =>
     .catch((err) => console.log('Error while fetching all posts: ', err));
 
 // Fetch all posts by tag
-export const getPostsByTag = async (tag?: string) => {
+export const getPostsByTag = async (tag?: string | (string | undefined)[]) => {
+  const isString = typeof tag === 'string';
+
   const params: Params = tag
     ? {
         limit: 'all',
-        filter: `tags:${convertString(tag)}`,
+        filter: `tag:${isString ? convertString(tag) : tag.join('+tag:')}`,
         include: ['tags', 'authors'],
       }
     : { include: ['tags', 'authors'] };
