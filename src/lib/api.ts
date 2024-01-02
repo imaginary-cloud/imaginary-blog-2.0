@@ -7,7 +7,7 @@ import { convertString } from './utils';
  * Extend the GhostContentAPIOptions interface to add makeRequest method
  *
  * As of today (13/12/2023), without this extra logic,
- * GhostContentAPI is throwing an error when combined with Next.js version 14:
+ * GhostContentAPI is throwing the following error when combined with Next.js version 14:
  *
  * Error: There is no suitable adapter to dispatch the request since :
  * adapter xhr is not supported by the environment
