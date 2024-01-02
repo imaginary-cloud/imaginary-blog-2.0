@@ -16,6 +16,8 @@ export default function Tags({ tags }: TagsProps) {
   const pathname = usePathname();
   const tagParam = useSearchParams()?.get('tag');
 
+  console.log('TagParam: ', tagParam);
+
   // Add URL parameters and keep the user on the same page
   const handleSelectedTag = useCallback(
     (name?: string) =>
@@ -41,7 +43,7 @@ export default function Tags({ tags }: TagsProps) {
           key={index}
           className={clsx(
             'cursor-pointer mx-5 text-black transition-colors hover:text-blue-500',
-            { 'text-blue-500': name === tagParam }
+            { 'text-blue-500': name?.toLowerCase() === tagParam }
           )}
           onClick={() => handleSelectedTag(name as string)}
         >

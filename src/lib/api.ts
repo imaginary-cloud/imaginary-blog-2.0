@@ -22,6 +22,7 @@ interface CustomGhostContentAPIOptions extends GhostContentAPIOptions {
   }) => Promise<any>;
 }
 
+// Create new GhostContentAPI instance
 const api = new GhostContentAPI({
   url: process.env.GHOST_URL as string,
   key: process.env.GHOST_KEY as string,
@@ -63,12 +64,13 @@ export const getPostsByTag = async (tag?: string | (string | undefined)[]) => {
         filter: `tag:${isString ? convertString(tag) : tag.join('+tag:')}`,
         include: ['tags', 'authors'],
       }
-    : { include: ['tags', 'authors'] };
+    : { limit: 'all', include: ['tags', 'authors'] };
 
   return await api.posts
     .browse(params)
     .catch((err) => console.log('Error while fetching posts by tag: ', err));
 };
+
 // Fetch post data
 export const getSinglePost = async (slug: string) =>
   await api.posts.read({ slug }, { include: ['tags', 'authors'] }).catch((err) => {
