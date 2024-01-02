@@ -7,7 +7,7 @@ import { convertString } from './utils';
  * Extend the GhostContentAPIOptions interface to add makeRequest method
  *
  * As of today (13/12/2023), without this extra logic,
- * GhostContentAPI is throwing an error when combined with Next.js version 14:
+ * GhostContentAPI is throwing the following error when combined with Next.js version 14:
  *
  * Error: There is no suitable adapter to dispatch the request since :
  * adapter xhr is not supported by the environment
@@ -54,11 +54,13 @@ export const getPosts = async () =>
     .catch((err) => console.log('Error while fetching all posts: ', err));
 
 // Fetch all posts by tag
-export const getPostsByTag = async (tag?: string) => {
+export const getPostsByTag = async (tag?: string | (string | undefined)[]) => {
+  const isString = typeof tag === 'string';
+
   const params: Params = tag
     ? {
         limit: 'all',
-        filter: `tags:${convertString(tag)}`,
+        filter: `tag:${isString ? convertString(tag) : tag.join('+tag:')}`,
         include: ['tags', 'authors'],
       }
     : { include: ['tags', 'authors'] };

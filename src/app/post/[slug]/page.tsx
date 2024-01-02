@@ -5,7 +5,7 @@ import { lato, merriweather } from '@/lib/fonts';
 
 import Slider from '@/components/Slider';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { convertDate } from '@/lib/utils';
+import { convertDate, convertString } from '@/lib/utils';
 
 // Dynamicly load Markdown component
 const Markdown = dynamic(() => import('markdown-to-jsx'), { ssr: false });
@@ -14,16 +14,21 @@ export default async function Post({ params }: { params: { slug: string } }) {
   // Fetch the post data based on the slug param
   const data = await getSinglePost(params.slug);
 
-  console.log('DATA: ', data);
-
-  // Check if data exists, if not, display a loading or error message
+  // Check if data exists, if it doesn't, display an empty state
   if (!data) {
     return <div>This post does not exist :/</div>;
   }
 
   // Destructure the relevant properties from the post data
   const { title, authors, tags, html, reading_time, updated_at } = data;
+
+  // Construct readingTime string based on reading_time variable
   const readingTime = reading_time ? `${reading_time} min read` : '';
+
+  // Handle tags array
+  const tagsArr = !!tags?.length
+    ? tags.map(({ name }) => convertString(name!))
+    : null;
 
   return (
     <div className="w-[80%] mx-auto">
@@ -80,15 +85,12 @@ export default async function Post({ params }: { params: { slug: string } }) {
           </div>
         )}
       </div>
-      {!!tags?.length && (
+      {!!tagsArr?.length && (
         <>
-          {tags?.map(async ({ name }, index) => (
-            <Slider
-              key={index}
-              title="People who read this post, also found these interesting:"
-              posts={await getPostsByTag(name)}
-            />
-          ))}
+          <Slider
+            title="People who read this post, also found these interesting:"
+            posts={await getPostsByTag(tagsArr)}
+          />
         </>
       )}
     </div>

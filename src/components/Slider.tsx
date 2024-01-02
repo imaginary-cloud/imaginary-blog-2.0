@@ -38,18 +38,20 @@ export default function Slider({ posts, title }: SliderProps) {
         onSlideChange={() => console.log('slide change')}
         navigation
       >
-        <div className="absolute top-1/2 transform -translate-y-1/2 bottom-0 flex items-center justify-between z-20 overflow-visible w-full">
-          <Button
-            icon={<FaChevronLeft className="w-5 h-5 text-gray-700" />}
-            onClick={() => swiperRef?.slidePrev()}
-            className="relative text-gray-800 p-2 rounded-full cursor-pointer transition duration-300 transform group hover:shadow-md hover:bg-gradient-to-l from-white to-gray-200"
-          />
-          <Button
-            icon={<FaChevronRight className="w-5 h-5 text-gray-700" />}
-            onClick={() => swiperRef?.slideNext()}
-            className="relative text-gray-800 p-2 rounded-full cursor-pointer transition duration-300 transform group hover:shadow-md hover:bg-gradient-to-r from-white to-gray-200"
-          />
-        </div>
+        {posts.length > 3 && (
+          <div className="absolute top-1/2 transform -translate-y-1/2 bottom-0 flex items-center justify-between z-20 overflow-visible w-full">
+            <Button
+              icon={<FaChevronLeft className="w-5 h-5 text-gray-700" />}
+              onClick={() => swiperRef?.slidePrev()}
+              className="relative text-gray-800 p-2 rounded-full cursor-pointer transition duration-300 transform group hover:shadow-md hover:bg-gradient-to-l from-white to-gray-200"
+            />
+            <Button
+              icon={<FaChevronRight className="w-5 h-5 text-gray-700" />}
+              onClick={() => swiperRef?.slideNext()}
+              className="relative text-gray-800 p-2 rounded-full cursor-pointer transition duration-300 transform group hover:shadow-md hover:bg-gradient-to-r from-white to-gray-200"
+            />
+          </div>
+        )}
 
         {posts?.map((post, index) => (
           <SwiperSlide key={index} className="flex !h-auto min-h-full">
