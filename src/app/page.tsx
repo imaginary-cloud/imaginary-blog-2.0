@@ -19,13 +19,7 @@ export default async function Home({ searchParams }: PageProps) {
     <main className="flex min-h-screen max-w-[1140px] mx-auto flex-col items-center py-10">
       <Tags tags={tags} />
       <Grid posts={posts} />
-      <Pagination
-        currentPage={page}
-        pages={pages}
-        next={next}
-        prev={prev}
-        posts={posts}
-      />
+      <Pagination currentPage={page} pages={pages} next={next} prev={prev} />
     </main>
   );
 }

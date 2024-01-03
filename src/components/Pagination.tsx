@@ -1,8 +1,8 @@
 'use client';
 
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
-import { Nullable, PostsOrPages } from '@tryghost/content-api';
+import { Nullable } from '@tryghost/content-api';
 import {
   Pagination as PaginationWrapper,
   PaginationContent,
@@ -17,7 +17,6 @@ type PaginationProps = {
   next?: Nullable<number>;
   prev?: Nullable<number>;
   pages: number;
-  posts: void | PostsOrPages;
 };
 
 export default function Pagination({
@@ -25,9 +24,8 @@ export default function Pagination({
   next,
   prev,
   pages,
-  posts,
 }: PaginationProps) {
-  // Handle hydration error
+  // Handle hydration error - https://nextjs.org/docs/messages/react-hydration-error
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -39,23 +37,27 @@ export default function Pagination({
 
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const handleClick = useCallback(
-    (page: number) => page && router.push(`${pathname}?page=${page}`),
-    [pathname, router]
+  // Change URL's page param.
+  const changePage = useCallback(
+    (page: Nullable<number> | undefined) => {
+      // Create a new instance of URLSearchParams based on the existing searchParams.
+      const params = new URLSearchParams(searchParams);
+      // Set page param to the new page number (converted to string).
+      params.set('page', page!.toString());
+      router.push(`${pathname}?${params.toString()}`);
+    },
+    [pathname, router, searchParams]
   );
 
-  const handlePrev = useCallback(() => {
-    prev && router.push(`${pathname}?page=${prev}`);
-  }, [pathname, prev, router]);
-
-  const handleNext = useCallback(() => {
-    next && router.push(`${pathname}?page=${next}`);
-  }, [next, pathname, router]);
+  const handleClick = useCallback((page: number) => changePage(page), [changePage]);
+  const handlePrev = useCallback(() => changePage(prev), [changePage, prev]);
+  const handleNext = useCallback(() => changePage(next), [changePage, next]);
 
   return (
     <>
-      {isClient && posts?.length! > 3 && (
+      {isClient && (prev || next) && (
         <PaginationWrapper className="mt-10">
           <PaginationContent>
             <PaginationItem>
