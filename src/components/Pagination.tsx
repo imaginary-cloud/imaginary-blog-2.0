@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { Nullable } from '@tryghost/content-api';
 import {
