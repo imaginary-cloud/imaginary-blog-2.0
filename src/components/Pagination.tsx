@@ -2,7 +2,7 @@
 
 import { useRouter, usePathname } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
-import { Nullable } from '@tryghost/content-api';
+import { Nullable, PostsOrPages } from '@tryghost/content-api';
 import {
   Pagination as PaginationWrapper,
   PaginationContent,
@@ -14,16 +14,18 @@ import {
 
 type PaginationProps = {
   currentPage: number;
-  pages: number;
   next?: Nullable<number>;
   prev?: Nullable<number>;
+  pages: number;
+  posts: void | PostsOrPages;
 };
 
 export default function Pagination({
   currentPage,
-  pages,
   next,
   prev,
+  pages,
+  posts,
 }: PaginationProps) {
   // Handle hydration error
   const [isClient, setIsClient] = useState(false);
@@ -53,7 +55,7 @@ export default function Pagination({
 
   return (
     <>
-      {isClient ? (
+      {isClient && posts?.length! > 3 && (
         <PaginationWrapper className="mt-10">
           <PaginationContent>
             <PaginationItem>
@@ -73,8 +75,6 @@ export default function Pagination({
             </PaginationItem>
           </PaginationContent>
         </PaginationWrapper>
-      ) : (
-        <span>loading...</span>
       )}
     </>
   );

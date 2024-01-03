@@ -29,8 +29,8 @@ export default async function Post({ params }: { params: { slug: string } }) {
   const related = !!tagsArr?.length ? await getPostsByTag({ tag: tagsArr }) : null;
 
   return (
-    <div className="w-[80%] mx-auto">
-      <div className="w-[50%] mx-auto py-20 text-black">
+    <div className="max-w-[1150px] mx-auto">
+      <div className="mx-auto py-20 text-black">
         {!!tags?.length && (
           <>
             <span className="text-gray-500 text-xs">FROM: </span>

@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <header className="h-full max-w-[1150px] mx-auto">
-      <nav className="md:flex w-full mx-auto px-5">
+      <nav className="md:flex w-full mx-auto">
         <div className="md:flex justify-between items-center w-full">
           <div className="flex justify-between items-center py-3 md:py-5">
             <Link href="/">

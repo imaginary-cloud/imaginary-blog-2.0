@@ -19,7 +19,13 @@ export default async function Home({ searchParams }: PageProps) {
     <main className="flex min-h-screen flex-col items-center p-32">
       <Tags tags={tags} />
       <Grid posts={posts} />
-      <Pagination currentPage={page} pages={pages} next={next} prev={prev} />
+      <Pagination
+        currentPage={page}
+        pages={pages}
+        next={next}
+        prev={prev}
+        posts={posts}
+      />
     </main>
   );
 }
