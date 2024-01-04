@@ -17,20 +17,8 @@ RUN npm install --only=production
 # Copy the rest of the application
 COPY . .
 
-# Set environment variables
-ARG GHOST_URL
-ARG GHOST_KEY
-ARG STAGING_USERNAME
-ARG STAGING_PASSWORD
-ENV GHOST_URL=$GHOST_URL
-ENV GHOST_KEY=$GHOST_KEY
-ENV STAGING_USERNAME=$STAGING_USERNAME
-ENV STAGING_PASSWORD=$STAGING_PASSWORD
-
-
 # Build the Next.js application
 RUN npm run build
-
 
 # Start the second stage
 FROM node:18-alpine as runner
@@ -42,6 +30,16 @@ COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/public ./public
+
+# Set environment variables
+ARG GHOST_URL
+ARG GHOST_KEY
+ARG STAGING_USERNAME
+ARG STAGING_PASSWORD
+ENV GHOST_URL=$GHOST_URL
+ENV GHOST_KEY=$GHOST_KEY
+ENV STAGING_USERNAME=$STAGING_USERNAME
+ENV STAGING_PASSWORD=$STAGING_PASSWORD
 
 # Expose port 3000 for the application to listen on
 EXPOSE 3000
