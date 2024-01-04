@@ -132,7 +132,7 @@ const menus: Menu[] = [
     ],
   },
   { title: 'CAREERS', url: '/careers' },
-  { title: 'Contact us', url: '/contacts', isBtn: true },
+  { title: 'CONTACT US', url: '/contacts', isBtn: true },
 ];
 
 export { menus, months };
