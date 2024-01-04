@@ -1,12 +1,28 @@
 type Menu = {
   title: string;
   url?: string;
+  isBtn?: boolean;
   sublinks?: {
     parent?: string;
     title: string;
     url: string;
   }[];
 };
+
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
 const menus: Menu[] = [
   {
@@ -116,21 +132,7 @@ const menus: Menu[] = [
     ],
   },
   { title: 'CAREERS', url: '/careers' },
-];
-
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
+  { title: 'Contact us', url: '/contacts', isBtn: true },
 ];
 
 export { menus, months };
