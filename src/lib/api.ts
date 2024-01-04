@@ -22,6 +22,7 @@ interface CustomGhostContentAPIOptions extends GhostContentAPIOptions {
   }) => Promise<any>;
 }
 
+// Create new GhostContentAPI instance
 const api = new GhostContentAPI({
   url: process.env.GHOST_URL as string,
   key: process.env.GHOST_KEY as string,
@@ -47,28 +48,30 @@ const api = new GhostContentAPI({
   },
 } as CustomGhostContentAPIOptions);
 
-// Fetch all posts using the api instance
-export const getPosts = async () =>
-  await api.posts
-    .browse({ include: ['tags', 'authors'] })
-    .catch((err) => console.log('Error while fetching all posts: ', err));
-
 // Fetch all posts by tag
-export const getPostsByTag = async (tag?: string | (string | undefined)[]) => {
+export const getPostsByTag = async ({ tag, currentPage = 1 }: requestProps) => {
+  // Check if tag param is a string
   const isString = typeof tag === 'string';
 
+  // Construct params object based on the tag param
   const params: Params = tag
     ? {
-        limit: 'all',
         filter: `tag:${isString ? convertString(tag) : tag.join('+tag:')}`,
         include: ['tags', 'authors'],
+        page: currentPage,
       }
-    : { include: ['tags', 'authors'] };
+    : { include: ['tags', 'authors'], page: currentPage };
 
-  return await api.posts
+  const posts = await api.posts
     .browse(params)
     .catch((err) => console.log('Error while fetching posts by tag: ', err));
+
+  // Handle pagination
+  const { limit, next, page, pages, prev } = posts!.meta.pagination || {};
+
+  return { posts, limit, next, page, pages, prev };
 };
+
 // Fetch post data
 export const getSinglePost = async (slug: string) =>
   await api.posts.read({ slug }, { include: ['tags', 'authors'] }).catch((err) => {

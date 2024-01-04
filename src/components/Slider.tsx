@@ -35,7 +35,6 @@ export default function Slider({ posts, title }: SliderProps) {
         onSwiper={(swiper) => setSwiperRef(swiper)}
         spaceBetween={50}
         slidesPerView={3}
-        onSlideChange={() => console.log('slide change')}
         navigation
       >
         {posts.length > 3 && (

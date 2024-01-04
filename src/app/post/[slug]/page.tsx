@@ -1,10 +1,9 @@
 import dynamic from 'next/dynamic';
 import { Fragment } from 'react';
-import { getPostsByTag, getSinglePost } from '@/lib/api';
-import { lato, merriweather } from '@/lib/fonts';
-
 import Slider from '@/components/Slider';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { getPostsByTag, getSinglePost } from '@/lib/api';
+import { lato, merriweather } from '@/lib/fonts';
 import { convertDate, convertString } from '@/lib/utils';
 
 // Dynamicly load Markdown component
@@ -14,7 +13,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
   // Fetch the post data based on the slug param
   const data = await getSinglePost(params.slug);
 
-  // Check if data exists, if it doesn't, display an empty state
+  // If slug data doesn't exist, display an empty state
   if (!data) {
     return <div>This post does not exist :/</div>;
   }
@@ -25,14 +24,13 @@ export default async function Post({ params }: { params: { slug: string } }) {
   // Construct readingTime string based on reading_time variable
   const readingTime = reading_time ? `${reading_time} min read` : '';
 
-  // Handle tags array
-  const tagsArr = !!tags?.length
-    ? tags.map(({ name }) => convertString(name!))
-    : null;
+  // Create tags array and retrieve related posts
+  const tagsArr = tags?.map(({ name }) => convertString(name!));
+  const related = !!tagsArr?.length ? await getPostsByTag({ tag: tagsArr }) : null;
 
   return (
-    <div className="w-[80%] mx-auto">
-      <div className="w-[50%] mx-auto py-20 text-black">
+    <div className="max-w-[1150px] mx-auto">
+      <div className="mx-auto py-20 text-black">
         {!!tags?.length && (
           <>
             <span className="text-gray-500 text-xs">FROM: </span>
@@ -85,13 +83,12 @@ export default async function Post({ params }: { params: { slug: string } }) {
           </div>
         )}
       </div>
-      {!!tagsArr?.length && (
-        <>
-          <Slider
-            title="People who read this post, also found these interesting:"
-            posts={await getPostsByTag(tagsArr)}
-          />
-        </>
+
+      {!!related?.posts && (
+        <Slider
+          title="People who read this post, also found these interesting:"
+          posts={related?.posts}
+        />
       )}
     </div>
   );

@@ -1,24 +1,25 @@
 import { getPostsByTag, getTags } from '@/lib/api';
-import Card from '@/components/Card';
-import Tags from '@/components/Tags';
 
-export default async function Home(props: PageProps) {
-  const searchParam = props.searchParams.tag;
-  const posts = await getPostsByTag(searchParam as string | undefined);
+import Tags from '@/components/Tags';
+import Grid from '@/components/Grid';
+import Pagination from '@/components/Pagination';
+
+export default async function Home({ searchParams }: PageProps) {
+  const tagParam = searchParams.tag;
+  const pageParam = searchParams.page;
+
   const tags = await getTags();
 
+  const { next, page, pages, posts, prev } = await getPostsByTag({
+    tag: tagParam,
+    currentPage: Number(pageParam) || undefined,
+  });
+
   return (
-    <main className="flex min-h-screen flex-col items-center p-32">
+    <main className="flex min-h-screen max-w-[1140px] mx-auto flex-col items-center py-10">
       <Tags tags={tags} />
-      {Array.isArray(posts) && posts.length ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-16">
-          {posts.map((post) => (
-            <Card key={post.id} data={post} />
-          ))}
-        </div>
-      ) : (
-        <div className="mt-5">No posts available.</div>
-      )}
+      <Grid posts={posts} />
+      <Pagination currentPage={page} pages={pages} next={next} prev={prev} />
     </main>
   );
 }
