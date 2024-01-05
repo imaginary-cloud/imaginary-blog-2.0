@@ -1,9 +1,4 @@
-type Menu = {
-  title: string;
-  url?: string;
-  isBtn?: boolean;
-  sublinks?: Sublink[];
-};
+import { Menu } from '@/common.types';
 
 const months = [
   'January',

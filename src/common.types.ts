@@ -1,14 +1,21 @@
-type PageProps = {
+export type PageProps = {
   params: {};
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-type requestProps = {
+export type requestProps = {
   tag?: string | (string | undefined)[];
   currentPage?: number;
 };
 
-type Sublink = {
+export type Menu = {
+  title: string;
+  url?: string;
+  isBtn?: boolean;
+  sublinks?: Sublink[];
+};
+
+export type Sublink = {
   title: string;
   url: string;
   parent?: string;

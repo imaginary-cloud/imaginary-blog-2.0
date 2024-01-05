@@ -3,6 +3,7 @@ import { getPostsByTag, getTags } from '@/lib/api';
 import Tags from '@/components/Tags';
 import Grid from '@/components/Grid';
 import Pagination from '@/components/Pagination';
+import { PageProps } from '@/common.types';
 
 export default async function Home({ searchParams }: PageProps) {
   const tagParam = searchParams.tag;
