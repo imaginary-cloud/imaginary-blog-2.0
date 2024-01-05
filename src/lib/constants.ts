@@ -2,11 +2,7 @@ type Menu = {
   title: string;
   url?: string;
   isBtn?: boolean;
-  sublinks?: {
-    parent?: string;
-    title: string;
-    url: string;
-  }[];
+  sublinks?: Sublink[];
 };
 
 const months = [

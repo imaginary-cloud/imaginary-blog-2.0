@@ -1,56 +1,58 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { Menu } from 'lucide-react';
 import { menus } from '@/lib/constants';
-import Button from '@/components/Button';
+import { FaChevronDown } from 'react-icons/fa';
+import { Menu } from 'lucide-react';
+import Image from 'next/image';
 
 export default function OldNavbar() {
   const [show, setShow] = useState(true);
-  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
 
-  const handleOpenMenu = (e: any) => {
-    setOpenMenu(e.target.outerText);
+  const handleOpenSubMenu = (title: string) => {
+    setOpenSubMenu((prev) => (prev === title ? null : title));
   };
 
   return (
-    <nav className="md:flex w-full mx-auto">
-      <div className="md:flex justify-between items-center w-full">
-        <div className="flex justify-between items-center py-3 md:py-5">
+    <nav className="">
+      <div className="flex w-full justify-between gap-10">
+        <div className="flex justify-between items-center mt-8 md:py-5">
           <Link href="/">
             <Image src="/logo.svg" alt="Logo" width={250} height={250} />
           </Link>
-          <button
+          <Menu
             className="text-gray-700 outline-none p-2 rounded-md md:hidden"
             onClick={() => setShow(!show)}
-          >
-            <Menu />
-          </button>
+          />
         </div>
-        <div
-          className={`md:flex md:flex-row flex-col items-center justify-between mt-8 md:mt-0 ${
-            show ? 'block' : 'hidden'
-          } `}
-        >
-          <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-            {menus.map(({ title, url, isBtn, sublinks }, idx) => (
-              <>
-                <li key={idx} className="text-gray-600 hover:text-indigo-600">
-                  {url ? (
-                    <Link href={url!}>{title}</Link>
-                  ) : (
-                    <span onClick={(e) => handleOpenMenu(e)}>{title}</span>
-                  )}
-                </li>
-                {isBtn && (
-                  <Button text={title} className="bg-blue-500 h-10 text-white p-2" />
-                )}
-              </>
-            ))}
-          </ul>
-        </div>
+        <ul className="flex justify-between items-center mt-8 w-full">
+          {menus.map((menu, index) => (
+            <li key={index} className="">
+              {menu.sublinks ? (
+                <span
+                  onClick={() => handleOpenSubMenu(menu.title)}
+                  className="inline-flex items-center"
+                >
+                  {menu.title}
+                  <FaChevronDown className="h-2 w-2 ml-1" />
+                </span>
+              ) : (
+                <Link href={menu.url!}>{menu.title}</Link>
+              )}
+              {menu.sublinks && openSubMenu === menu.title && (
+                <div className="absolute left-0 w-screen bg-gray-500 py-10 z-10">
+                  {menu.sublinks.map((sublink, subIndex) => (
+                    <li key={subIndex} className="px-10">
+                      <Link href={sublink.url}>{sublink.title}</Link>
+                    </li>
+                  ))}
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
     </nav>
   );

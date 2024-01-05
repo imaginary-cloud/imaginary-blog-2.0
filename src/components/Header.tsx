@@ -3,7 +3,7 @@ import OldNavbar from './OldNavbar';
 
 export default function Header() {
   return (
-    <header className="h-full max-w-[1150px] mx-auto">
+    <header>
       {/* <OldNavbar /> */}
       <Navbar />
     </header>
