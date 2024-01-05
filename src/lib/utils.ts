@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { months } from './constants';
+import { Sublink } from '@/common.types';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -31,4 +32,18 @@ export const convertDate = (date: string) => {
   const res = new Date(date);
 
   return `${months[res.getMonth()]} ${res.getDay()}, ${res.getFullYear()}`;
+};
+
+export const groupByParent = (sublinks: Sublink[]) => {
+  const columns: Record<string, Sublink[]> = {};
+
+  sublinks.forEach((sublink) => {
+    const parent = sublink.parent;
+    if (!columns[parent!]) {
+      columns[parent!] = [];
+    }
+    columns[parent!].push(sublink);
+  });
+
+  return Object.entries(columns);
 };

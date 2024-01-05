@@ -118,8 +118,14 @@ const menus: Menu[] = [
   {
     title: 'COMPANY',
     sublinks: [
-      { title: 'About Us', url: 'about-us' },
-      { title: 'Why Us', url: 'why-us' },
+      {
+        title: 'About Us',
+        url: 'about-us',
+      },
+      {
+        title: 'Why Us',
+        url: 'why-us',
+      },
     ],
   },
   { title: 'CAREERS', url: '/careers' },
