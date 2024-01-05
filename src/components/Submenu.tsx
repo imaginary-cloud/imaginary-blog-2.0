@@ -16,7 +16,9 @@ export default function Submenu({ sublinks }: SubmenuProps) {
     <div className="flex justify-between h-fit w-[80%] p-5 mx-auto">
       {groupByParent(sublinks).map(([parent, links]) => (
         <div key={parent} className="">
-          {parent && <p className="font-bold text-gray-700 mb-2">{parent}</p>}
+          {parent !== 'undefined' && (
+            <p className="font-bold text-gray-700 mb-2">{parent}</p>
+          )}
           <ul className="list-none">
             {links.map((link, subIndex) => (
               <li key={subIndex}>
