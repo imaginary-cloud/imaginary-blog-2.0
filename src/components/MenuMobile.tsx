@@ -15,6 +15,7 @@ import {
 } from './ui/accordion';
 import { menus } from '@/lib/constants';
 import { groupSublinksByParent } from '@/lib/utils';
+import { Separator } from './ui/separator';
 
 export default function MenuMobile() {
   const router = useRouter();
@@ -25,9 +26,9 @@ export default function MenuMobile() {
         <SheetTrigger>
           <MenuIcon />
         </SheetTrigger>
-        <SheetContent>
+        <SheetContent className="p-5">
           <SheetHeader />
-          <div className="flex flex-col gap-4 mt-10 px-0">
+          <div className="flex flex-col gap-4 mt-10 border-red-500">
             {menus.map(({ title, sublinks, url }, index) => {
               const groupedSublinks = (sublinks: any) =>
                 groupSublinksByParent(sublinks);
@@ -62,7 +63,7 @@ export default function MenuMobile() {
                                     <AccordionItem value={parent}>
                                       <AccordionTrigger>{parent}</AccordionTrigger>
                                       <AccordionContent className="flex flex-col justify-start gap-2">
-                                        <div className="flex flex-col mt-3 gap-2">
+                                        <div className="flex flex-col my-5 gap-2">
                                           {links.map((link) => (
                                             <a
                                               key={link.title}
@@ -86,7 +87,10 @@ export default function MenuMobile() {
                       </AccordionItem>
                     </Accordion>
                   ) : (
-                    <a>{title}</a>
+                    <>
+                      <a className="py-2">{title}</a>
+                      <Separator />
+                    </>
                   )}
                 </>
               );

@@ -5,15 +5,26 @@ import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
+import { Separator } from './separator';
 
 const Accordion = AccordionPrimitive.Root;
 
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
->(({ className, ...props }, ref) => (
-  <AccordionPrimitive.Item ref={ref} className={cn(className)} {...props} />
-));
+>(({ className, ...props }, ref) => {
+  return (
+    <>
+      <AccordionPrimitive.Item
+        ref={ref}
+        className={cn('accordionItem py-3', className)}
+        {...props}
+      />
+      {/* Separator will be styled based on the AccordionItem state via CSS */}
+      <Separator className="separator" />
+    </>
+  );
+});
 AccordionItem.displayName = 'AccordionItem';
 
 const AccordionTrigger = React.forwardRef<

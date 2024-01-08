@@ -111,3 +111,13 @@
     border-bottom: 1px solid $primary-color;
   }
 }
+
+.accordionItem {
+  + .separator {
+    display: block; // Show separator by default
+  }
+
+  &[data-state='open'] + .separator {
+    display: none; // Hide separator when AccordionItem is open
+  }
+}
