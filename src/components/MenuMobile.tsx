@@ -1,7 +1,12 @@
 import { useRouter } from 'next/navigation';
 import { Menu as MenuIcon } from 'lucide-react';
 
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import {
   Accordion,
   AccordionContent,
@@ -21,6 +26,7 @@ export default function MenuMobile() {
           <MenuIcon />
         </SheetTrigger>
         <SheetContent>
+          <SheetHeader />
           <div className="flex flex-col gap-4 mt-10 px-0">
             {menus.map(({ title, sublinks, url }, index) => {
               const groupedSublinks = (sublinks: any) =>

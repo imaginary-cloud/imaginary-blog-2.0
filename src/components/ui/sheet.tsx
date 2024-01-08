@@ -6,6 +6,8 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const Sheet = SheetPrimitive.Root;
 
@@ -81,7 +83,11 @@ const SheetHeader = ({
   <div
     className={cn('flex flex-col space-y-2 text-center sm:text-left', className)}
     {...props}
-  />
+  >
+    <Link href="/">
+      <Image src="/logo.svg" alt="Logo" width={250} height={250} />
+    </Link>
+  </div>
 );
 SheetHeader.displayName = 'SheetHeader';
 
