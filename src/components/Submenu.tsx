@@ -13,7 +13,7 @@ export default function Submenu({ sublinks }: SubmenuProps) {
   if (!sublinks) return null;
 
   return (
-    <div className="flex justify-between h-fit w-[80%] p-5 mx-auto">
+    <div className="flex justify-between h-fit w-[40%] p-5 mx-auto">
       {groupByParent(sublinks).map(([parent, links]) => (
         <div key={parent} className="">
           {parent !== 'undefined' && (

@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={lato.className}>
         <Header />
-        {children}
+        <main className="flex align-center mx-auto max-w-[1140px]">{children}</main>
       </body>
     </html>
   );
