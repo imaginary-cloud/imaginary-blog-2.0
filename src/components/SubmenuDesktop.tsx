@@ -1,22 +1,21 @@
 import { useRouter } from 'next/navigation';
 import { NavigationMenuLink } from './ui/navigation-menu';
-import { Sublink } from '@/common.types';
-import { groupByParent } from '@/lib/utils';
+import { Sublink, SubmenuProps } from '@/common.types';
+import { groupSublinksByParent } from '@/lib/utils';
 
-type SubmenuProps = {
-  sublinks: Sublink[];
-};
-
-export default function Submenu({ sublinks }: SubmenuProps) {
+export default function SubmenuDesktop({ sublinks }: SubmenuProps) {
   const router = useRouter();
 
   if (!sublinks) return null;
 
+  // Group sublinks by their parent
+  const groupedSublinks = groupSublinksByParent(sublinks);
+
   return (
-    <div className="flex justify-between h-fit w-[40%] p-5 mx-auto">
-      {groupByParent(sublinks).map(([parent, links]) => (
+    <div className="flex justify-between h-fit w-[40%] md:w-[60%] p-5 mx-auto">
+      {Object.entries(groupedSublinks).map(([parent, links]) => (
         <div key={parent} className="">
-          {parent !== 'undefined' && (
+          {parent !== 'default' && (
             <p className="font-bold text-gray-700 mb-2">{parent}</p>
           )}
           <ul className="list-none">

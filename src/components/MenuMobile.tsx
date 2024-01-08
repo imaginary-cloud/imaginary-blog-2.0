@@ -1,23 +1,19 @@
 import { useRouter } from 'next/navigation';
-import { menus } from '@/lib/constants';
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
 import { Menu as MenuIcon } from 'lucide-react';
+
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
-import { groupByParent } from '@/lib/utils';
+} from './ui/accordion';
+import { menus } from '@/lib/constants';
+import { groupSublinksByParent } from '@/lib/utils';
 
 export default function MenuMobile() {
+  const router = useRouter();
+
   return (
     <div className="lg:hidden">
       <Sheet>
@@ -25,72 +21,65 @@ export default function MenuMobile() {
           <MenuIcon />
         </SheetTrigger>
         <SheetContent>
-          {menus.map(({ title, isBtn, sublinks, url }, index) => (
-            <>
-              {sublinks ? (
-                <Accordion type="single" collapsible className="mt-5" key={index}>
-                  <AccordionItem value={title}>
-                    <AccordionTrigger>{title}</AccordionTrigger>
-                    <AccordionContent className="flex flex-col flex-start">
-                      <>
-                        {groupByParent(sublinks).map(([parent, links], idx) => (
+          {menus.map(({ title, sublinks, url }, index) => {
+            const groupedSublinks = (sublinks: any) =>
+              groupSublinksByParent(sublinks);
+            return (
+              <>
+                {sublinks ? (
+                  <Accordion type="single" collapsible key={index}>
+                    <AccordionItem key={title} value={title}>
+                      <AccordionTrigger>{title}</AccordionTrigger>
+                      <AccordionContent>
+                        {sublinks && (
                           <>
-                            {parent ? (
-                              <Accordion type="single" collapsible key={idx}>
-                                <AccordionItem key={parent} value={parent}>
-                                  <AccordionTrigger>{parent}</AccordionTrigger>
-                                  {links.map(({ title, url }) => (
-                                    <AccordionContent key={title}>
-                                      <a key={idx} href={url}>
-                                        {title}
-                                      </a>
-                                    </AccordionContent>
-                                  ))}
-                                </AccordionItem>
-                              </Accordion>
-                            ) : (
-                              <a key={idx} href={url}>
-                                {title}
+                            {groupedSublinks(sublinks)['default']?.map((sublink) => (
+                              <a
+                                key={sublink.title}
+                                href={sublink.url}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  router.push(sublink.url);
+                                }}
+                              >
+                                {sublink.title}
                               </a>
-                            )}
-                          </>
-                        ))}
-                      </>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              ) : (
-                <p key={index}>{title}</p>
-              )}
-              {/* {sublinks && (
-                <>
-                  {groupByParent(sublinks).map(([parent, links], idx) => (
-                    <>
-                      {parent ? (
-                        <Accordion type="single" collapsible key={idx}>
-                          <AccordionItem key={title} value={title}>
-                            <AccordionTrigger>{title}</AccordionTrigger>
-                            {links.map((link) => (
-                              <AccordionContent key={link.title}>
-                                <a key={idx} href={link.url}>
-                                  {link.title}
-                                </a>
-                              </AccordionContent>
                             ))}
-                          </AccordionItem>
-                        </Accordion>
-                      ) : (
-                        <a key={idx} href={url}>
-                          {title}
-                        </a>
-                      )}
-                    </>
-                  ))}
-                </>
-              )}
-              {!sublinks && <p key={index}>{title}</p>} */}
-            </>
-          ))}
+
+                            {Object.entries(groupedSublinks(sublinks))
+                              .filter(([parent]) => parent !== 'default')
+                              .map(([parent, links]) => (
+                                <Accordion key={parent} type="single" collapsible>
+                                  <AccordionItem value={parent}>
+                                    <AccordionTrigger>{parent}</AccordionTrigger>
+                                    <AccordionContent>
+                                      {links.map((link) => (
+                                        <a
+                                          key={link.title}
+                                          href={link.url}
+                                          onClick={(e) => {
+                                            e.preventDefault();
+                                            router.push(link.url);
+                                          }}
+                                        >
+                                          {link.title}
+                                        </a>
+                                      ))}
+                                    </AccordionContent>
+                                  </AccordionItem>
+                                </Accordion>
+                              ))}
+                          </>
+                        )}
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                ) : (
+                  <a>{title}</a>
+                )}
+              </>
+            );
+          })}
         </SheetContent>
       </Sheet>
     </div>

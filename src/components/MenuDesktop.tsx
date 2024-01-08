@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/navigation-menu';
 
 import { menus } from '@/lib/constants';
-import Submenu from './Submenu';
+import SubmenuDesktop from './SubmenuDesktop';
 import Button from './Button';
 
 export default function MenuDesktop() {
@@ -23,7 +23,7 @@ export default function MenuDesktop() {
             <>
               <NavigationMenuTrigger>{title}</NavigationMenuTrigger>
               <NavigationMenuContent>
-                <Submenu sublinks={sublinks} />
+                <SubmenuDesktop sublinks={sublinks} />
               </NavigationMenuContent>
             </>
           ) : (

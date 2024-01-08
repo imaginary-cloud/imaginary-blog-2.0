@@ -47,3 +47,25 @@ export const groupByParent = (sublinks: Sublink[]) => {
 
   return Object.entries(columns);
 };
+
+// Define a type for the grouped sublinks object
+type GroupedSublinks = {
+  [parent: string]: Sublink[];
+};
+
+// Function to group sublinks by parent
+export const groupSublinksByParent = (sublinks: Sublink[]) => {
+  const grouped = sublinks.reduce<GroupedSublinks>((acc, sublink) => {
+    // Use 'default' as a key for sublinks without a parent
+    const key = sublink.parent || 'default';
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+    acc[key].push(sublink);
+    return acc;
+  }, {});
+
+  console.log(grouped);
+
+  return grouped;
+};

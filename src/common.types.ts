@@ -20,3 +20,7 @@ export type Sublink = {
   url: string;
   parent?: string;
 };
+
+export type SubmenuProps = {
+  sublinks: Sublink[];
+};
