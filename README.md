@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Imaginary Blog 2.0
+
+A Next.js application that communicates with Imaginary Cloud's Ghost API.
+
+## Description
+
+This project seeks to enhance the way Imaginary Cloud Blog is developed by using a state of the art frontend framework such as Next.js 14.
 
 ## Getting Started
 
-First, run the development server:
+### Dependencies
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js >= v18.17.0
+- npm
+- Next.js >= 14
+- Tailwind CSS
+- Shadcn UI
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installing
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Clone the repository using `git clone [https://your-repository-url](https://github.com/imaginary-cloud/imaginary-blog-2.0)`
+- Install dependencies with `npm install`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Running the app
 
-## Learn More
+- Run the development server with `npm run dev`
+- Build the project for production with `npm run build`
+- Start the production server with `npm start`
 
-To learn more about Next.js, take a look at the following resources:
+## Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+After running the development server, open `http://localhost:3000` to view it in the browser.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Structure
 
-## Deploy on Vercel
+- `public`: Static assets like images and fonts.
+- `src`: Source files for your project.
+  - `app`: Next.js pages and API routes.
+  - `components`: Reusable UI components.
+  - `lib`: Utility libraries and functions.
+  - `styles`: Global styles and CSS.
+- `common.types.ts`: TypeScript type definitions.
+- `Dockerfile`: Container configuration file.
+- `package.json`: Project metadata and script commands.
+- `tailwind.config.ts`: Tailwind CSS configuration.
+- `tsconfig.json`: TypeScript configuration.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Help
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Any advise for common problems or issues.
