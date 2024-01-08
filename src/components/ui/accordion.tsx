@@ -17,7 +17,7 @@ const AccordionItem = React.forwardRef<
     <>
       <AccordionPrimitive.Item
         ref={ref}
-        className={cn('accordionItem py-3', className)}
+        className={cn('submenuItem py-3', className)}
         {...props}
       />
       {/* Separator will be styled based on the AccordionItem state via CSS */}

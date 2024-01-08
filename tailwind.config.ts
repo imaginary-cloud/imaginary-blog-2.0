@@ -17,10 +17,10 @@ module.exports = {
     },
     extend: {
       colors: {
-        border: 'hsl(var(--border))',
+        border: '#e6f2ff',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
+        background: '#f9fcff',
         foreground: 'hsl(var(--foreground))',
         primary: '#057aff',
         secondary: '#000000cc',

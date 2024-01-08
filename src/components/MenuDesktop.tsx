@@ -22,7 +22,7 @@ export default function MenuDesktop() {
           {sublinks ? (
             <>
               <NavigationMenuTrigger>{title}</NavigationMenuTrigger>
-              <NavigationMenuContent>
+              <NavigationMenuContent className="bg-background">
                 <SubmenuDesktop sublinks={sublinks} />
               </NavigationMenuContent>
             </>
