@@ -1,6 +1,6 @@
+import { ChevronRight, Menu as MenuIcon } from 'lucide-react';
 import { Separator } from './ui/separator';
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from './ui/sheet';
-import { ChevronRight, Menu as MenuIcon } from 'lucide-react';
 
 type SheetProps = {
   children: JSX.Element;
