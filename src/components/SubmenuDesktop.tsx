@@ -1,5 +1,3 @@
-// src/components/SubmenuDesktop.tsx
-
 import { useRouter } from 'next/navigation';
 import { NavigationMenuLink } from './ui/navigation-menu';
 import { Sublink } from '@/common.types'; // Import Sublink type from utils
