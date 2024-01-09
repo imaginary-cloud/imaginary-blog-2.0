@@ -18,7 +18,7 @@ This project seeks to enhance the way Imaginary Cloud Blog is developed by using
 
 ### Installing
 
-- Clone the repository using `git clone [https://your-repository-url](https://github.com/imaginary-cloud/imaginary-blog-2.0)`
+- Clone the repository using `git clone https://github.com/imaginary-cloud/imaginary-blog-2.0`
 - Install dependencies with `npm install`
 
 ### Running the app
