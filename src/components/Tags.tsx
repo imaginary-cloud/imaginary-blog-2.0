@@ -16,8 +16,6 @@ export default function Tags({ tags }: TagsProps) {
   const pathname = usePathname();
   const tagParam = useSearchParams()?.get('tag');
 
-  console.log('TagParam: ', tagParam);
-
   // Add URL parameters and keep the user on the same page
   const handleSelectedTag = useCallback(
     (name?: string) =>
