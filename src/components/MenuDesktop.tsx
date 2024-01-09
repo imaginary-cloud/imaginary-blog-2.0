@@ -20,7 +20,7 @@ export default function MenuDesktop() {
         <NavigationMenuItem key={index} className="list-none">
           {sublinks ? (
             <>
-              <NavigationMenuTrigger>{title}</NavigationMenuTrigger>
+              <NavigationMenuTrigger>{title.toUpperCase()}</NavigationMenuTrigger>
               <NavigationMenuContent className="bg-background">
                 <SubmenuDesktop sublinks={sublinks} />
               </NavigationMenuContent>
@@ -33,10 +33,13 @@ export default function MenuDesktop() {
                   href={url || '#'}
                   onClick={() => router.push(url!)}
                 >
-                  {title}
+                  {title.toUpperCase()}
                 </NavigationMenuLink>
               ) : (
-                <Button text={title} className="bg-blue-500 h-10 text-white p-2" />
+                <Button
+                  text={title.toUpperCase()}
+                  className="bg-blue-500 text-white h-fit p-2 lg:mx:3"
+                />
               )}
             </>
           )}

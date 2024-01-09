@@ -1,4 +1,4 @@
-import { useCallback, MouseEvent, ReactHTMLElement } from 'react';
+import { useCallback, MouseEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   Accordion,
@@ -28,12 +28,17 @@ export default function SubmenuMobile({ sublinks }: SubmenuProps) {
           {parent !== 'no-parent' ? (
             <Accordion type="single" collapsible>
               <AccordionItem value={parent}>
-                <AccordionTrigger>{parent}</AccordionTrigger>
+                <AccordionTrigger>{parent.toUpperCase()}</AccordionTrigger>
                 <AccordionContent className="flex flex-col justify-start gap-3 px-3 pt-4">
                   <>
                     {links.map(({ url, title }) => (
-                      <a key={title} href={url} onClick={(e) => handleClick(e, url)}>
-                        {title}
+                      <a
+                        className="text-gray"
+                        key={title}
+                        href={url}
+                        onClick={(e) => handleClick(e, url)}
+                      >
+                        {title.toUpperCase()}
                       </a>
                     ))}
                   </>
@@ -42,13 +47,11 @@ export default function SubmenuMobile({ sublinks }: SubmenuProps) {
             </Accordion>
           ) : (
             <div className="flex flex-col gap-3">
-              <>
-                {links.map(({ url, title }) => (
-                  <a key={title} href={url} onClick={(e) => handleClick(e, url)}>
-                    {title}
-                  </a>
-                ))}
-              </>
+              {links.map(({ url, title }) => (
+                <a key={title} href={url} onClick={(e) => handleClick(e, url)}>
+                  {title.toUpperCase()}
+                </a>
+              ))}
             </div>
           )}
         </>
