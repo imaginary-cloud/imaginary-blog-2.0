@@ -34,38 +34,17 @@ export const convertDate = (date: string) => {
   return `${months[res.getMonth()]} ${res.getDay()}, ${res.getFullYear()}`;
 };
 
-export const groupByParent = (sublinks: Sublink[]) => {
-  const columns: Record<string, Sublink[]> = {};
-
-  sublinks.forEach((sublink) => {
-    const parent = sublink.parent;
-    if (!columns[parent!]) {
-      columns[parent!] = [];
-    }
-    columns[parent!].push(sublink);
-  });
-
-  return Object.entries(columns);
-};
-
-// Define a type for the grouped sublinks object
 type GroupedSublinks = {
   [parent: string]: Sublink[];
 };
 
-// Function to group sublinks by parent
-export const groupSublinksByParent = (sublinks: Sublink[]) => {
-  const grouped = sublinks.reduce<GroupedSublinks>((acc, sublink) => {
-    // Use 'default' as a key for sublinks without a parent
-    const key = sublink.parent || 'default';
+export const groupSublinksByParent = (sublinks: Sublink[]): GroupedSublinks => {
+  return sublinks.reduce<GroupedSublinks>((acc, sublink) => {
+    const key = sublink.parent || 'no-parent';
     if (!acc[key]) {
       acc[key] = [];
     }
     acc[key].push(sublink);
     return acc;
   }, {});
-
-  console.log(grouped);
-
-  return grouped;
 };

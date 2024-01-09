@@ -1,22 +1,24 @@
+// src/components/SubmenuDesktop.tsx
+
 import { useRouter } from 'next/navigation';
 import { NavigationMenuLink } from './ui/navigation-menu';
-import { SubmenuProps } from '@/common.types';
+import { Sublink } from '@/common.types'; // Import Sublink type from utils
 import { groupSublinksByParent } from '@/lib/utils';
 import { Separator } from './ui/separator';
 
+type SubmenuProps = {
+  sublinks: Sublink[];
+};
+
 export default function SubmenuDesktop({ sublinks }: SubmenuProps) {
   const router = useRouter();
-
-  if (!sublinks) return null;
-
-  // Group sublinks by their parent
   const groupedSublinks = groupSublinksByParent(sublinks);
 
   return (
     <div className="flex justify-between align-start h-fit w-[40%] md:w-[60%] p-5 mx-auto">
       {Object.entries(groupedSublinks).map(([parent, links]) => (
         <div key={parent}>
-          {parent !== 'default' && (
+          {parent !== 'no-parent' && (
             <>
               <p className="font-bold text-gray-700 pb-2">{parent}</p>
               <Separator className="mb-4" />
