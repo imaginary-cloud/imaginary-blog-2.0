@@ -15,6 +15,7 @@ import {
 } from './ui/accordion';
 import { menus } from '@/lib/constants';
 import { groupSublinksByParent } from '@/lib/utils';
+import { Separator } from './ui/separator';
 
 export default function MenuMobile() {
   const router = useRouter();
@@ -37,7 +38,7 @@ export default function MenuMobile() {
                     <Accordion type="single" collapsible>
                       <AccordionItem value={title}>
                         <AccordionTrigger>{title}</AccordionTrigger>
-                        <AccordionContent>
+                        <AccordionContent className="flex flex-col justify-start gap-2 pt-5 pl-3">
                           {Object.entries(groupedSublinks).map(
                             ([parent, links], groupIndex) => (
                               <div key={groupIndex}>
@@ -45,35 +46,41 @@ export default function MenuMobile() {
                                   <Accordion type="single" collapsible>
                                     <AccordionItem value={parent}>
                                       <AccordionTrigger>{parent}</AccordionTrigger>
-                                      <AccordionContent>
-                                        {links.map((link, linkIndex) => (
-                                          <a
-                                            key={linkIndex}
-                                            href={link.url}
-                                            onClick={(e) => {
-                                              e.preventDefault();
-                                              router.push(link.url);
-                                            }}
-                                          >
-                                            {link.title}
-                                          </a>
-                                        ))}
+                                      <AccordionContent className="flex flex-col justify-start gap-3 px-3 pt-4">
+                                        <>
+                                          {links.map((link, linkIndex) => (
+                                            <a
+                                              key={linkIndex}
+                                              href={link.url}
+                                              onClick={(e) => {
+                                                e.preventDefault();
+                                                router.push(link.url);
+                                              }}
+                                            >
+                                              {link.title}
+                                            </a>
+                                          ))}
+                                        </>
                                       </AccordionContent>
                                     </AccordionItem>
                                   </Accordion>
                                 ) : (
-                                  links.map((link, linkIndex) => (
-                                    <a
-                                      key={linkIndex}
-                                      href={link.url}
-                                      onClick={(e) => {
-                                        e.preventDefault();
-                                        router.push(link.url);
-                                      }}
-                                    >
-                                      {link.title}
-                                    </a>
-                                  ))
+                                  <div className="flex flex-col gap-3">
+                                    <>
+                                      {links.map((link, linkIndex) => (
+                                        <a
+                                          key={linkIndex}
+                                          href={link.url}
+                                          onClick={(e) => {
+                                            e.preventDefault();
+                                            router.push(link.url);
+                                          }}
+                                        >
+                                          {link.title}
+                                        </a>
+                                      ))}
+                                    </>
+                                  </div>
                                 )}
                               </div>
                             )
@@ -84,6 +91,7 @@ export default function MenuMobile() {
                   ) : (
                     <>
                       <a
+                        className="flex flex-col gap-4 py-2"
                         href={url}
                         onClick={(e) => {
                           e.preventDefault();
@@ -92,6 +100,7 @@ export default function MenuMobile() {
                       >
                         {title}
                       </a>
+                      <Separator />
                     </>
                   )}
                 </div>
