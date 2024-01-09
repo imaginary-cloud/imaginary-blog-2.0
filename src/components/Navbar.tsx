@@ -9,8 +9,8 @@ import MenuMobile from './MenuMobile';
 
 export default function Navbar() {
   return (
-    <NavigationMenu className="mx-auto">
-      <div className="flex w-full lg:px-0 px-10 lg:justify-center justify-between items-center">
+    <NavigationMenu>
+      <div className="flex w-[1140px] px-3 justify-between items-center">
         <NavigationMenuItem key="logo" className="list-none p-5">
           <Link href="/">
             <Image src="/logo.svg" alt="Logo" width={250} height={250} />
